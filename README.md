@@ -15,8 +15,9 @@ clearsign-plugin-venus was built by [DavD](https://github.com/davd-mbt/) of [Cle
 from the forkable app-plugin-boilerplate following the ledger 
 [plugin guide](https://developers.ledger.com/docs/dapp/embedded-plugin/overview/)
 
-Inspired by ideas and code samples found in other open source app-plugin project repo's hosted on GitGub for [LedgerHQ](https://github.com/LedgerHQ)
-,ClearSign are dedicated to achieving absolute transparency and security in every digital transaction. Our technology ensures clear signing for integrated dApps, eliminating vulnerabilities and providing a secure and fluid experience. Join us in making blind signing a thing of the past!
+Inspired by ideas and code samples found in other open source app-plugin project repo's hosted on GitGub for [LedgerHQ](https://github.com/LedgerHQ).
+
+ClearSign are dedicated to achieving absolute transparency and security in every digital transaction. Our technology ensures clear signing for integrated dApps, eliminating vulnerabilities and providing a secure and fluid experience. Join us in making blind signing a thing of the past!
 
 Twitter X: [@ClearSignTech](https://twitter.com/ClearSignTech/)
 
