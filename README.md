@@ -1,17 +1,17 @@
-# ClearSign for Ledger app-plugin-venus
+# clearsign-ledger-plugin-venus
 
-This repo contains a ClearSign ledger plugin for the Venus Protocol smart contract on BnbChain.
+This repo contains a ClearSign Ledger Plugin for the Venus Protocol smart contracts on BnbChain.
 
-Plugins are lightweight applications that go hand-in-hand with the Ethereum
+ClearSign Ledger Plugins are lightweight applications that go hand-in-hand with the Ethereum
 Application on a Nano S, SP, X and Stax device.
 
 They allow users to safely interact with smart contracts by parsing the
 transaction data and displaying its content in a human readable way. This is
 done on a "per contract" basis, meaning a plugin is required for every DApp.
 
-## Developer Contributors and Attribution Notice for app-plugin-venus
+## Developer Contributors and Attribution Notice for clearsign-ledger-plugin-venus
 
-app-plugin-venus was built by [DavD](https://github.com/davd-mbt/) of [ClearSign Technology](https://clearsign.tech) 
+clearsign-ledger-plugin-venus was built by [DavD](https://github.com/davd-mbt/) of [ClearSign Technology](https://clearsign.tech) 
 from the forkable app-plugin-boilerplate following the ledger 
 [plugin guide](https://developers.ledger.com/docs/dapp/embedded-plugin/overview/)
 
