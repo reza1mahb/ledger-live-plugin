@@ -9,12 +9,11 @@ void handle_query_contract_id(void *parameters) {
 
     // For the first screen, display the plugin name.
     strlcpy(msg->name, PLUGIN_NAME, msg->nameLength);
-    
-    //assume success
+
+    // assume success
     msg->result = ETH_PLUGIN_RESULT_OK;
 
     switch (context->selectorIndex) {
-
         // *** Bep20
         case BEP20_APPROVE:
             strlcpy(msg->version, "Enable token", msg->versionLength);
@@ -58,11 +57,11 @@ void handle_query_contract_id(void *parameters) {
 
         // *** Vaults ***
         case VAULT_DEPOSIT:
-            //using ticker of token being deposited for vault name  eg. VAI or VRT
-            strlcpy(msg->version, context->ticker_sent, msg->versionLength); 
-            strlcat(msg->version, " vault", msg->versionLength); 
+            // using ticker of token being deposited for vault name  eg. VAI or VRT
+            strlcpy(msg->version, context->ticker_sent, msg->versionLength);
+            strlcat(msg->version, " vault", msg->versionLength);
             break;
-        
+
         case VAULT_DEPOSIT_TOKEN:
             strlcpy(msg->version, "XVS vault", msg->versionLength);
             break;
@@ -80,16 +79,16 @@ void handle_query_contract_id(void *parameters) {
             break;
 
         case VAULT_WITHDRAW_VRTXVS:
-            strlcpy(msg->version, context->ticker_sent, msg->versionLength); 
-            strlcat(msg->version, " vault withdraw", msg->versionLength); 
+            strlcpy(msg->version, context->ticker_sent, msg->versionLength);
+            strlcat(msg->version, " vault withdraw", msg->versionLength);
             break;
 
         case VAULT_CLAIM:
-            strlcpy(msg->version, context->ticker_sent, msg->versionLength); 
-            strlcat(msg->version, " vault", msg->versionLength); 
+            strlcpy(msg->version, context->ticker_sent, msg->versionLength);
+            strlcat(msg->version, " vault", msg->versionLength);
             /*TODO display VAI or VRT before "vault" - but there is no way we know which one
                    as the method is the same for each vault and has no paramters eg. claim()
-                   Removed from spec for now 
+                   Removed from spec for now
             */
             break;
 
@@ -126,8 +125,8 @@ void handle_query_contract_id(void *parameters) {
         case VENUS_MINT_VAI:
             strlcpy(msg->version, "Mint VAI", msg->versionLength);
             break;
- 
-        case VENUS_REPAY_VAI:        
+
+        case VENUS_REPAY_VAI:
             strlcpy(msg->version, "Repay VAI", msg->versionLength);
             break;
 

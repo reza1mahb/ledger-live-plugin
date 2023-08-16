@@ -16,11 +16,13 @@ void handle_provide_token(void *parameters) {
         context->token1_found = true;
     } else if (msg->item1) {
         // The app found the information for the requested token!
-        
+
         // Store its decimals.
         context->decimals_sent = msg->item1->token.decimals;
         // Store its ticker.
-        strlcpy(context->ticker_sent, (char *) msg->item1->token.ticker, sizeof(context->ticker_sent));
+        strlcpy(context->ticker_sent,
+                (char *) msg->item1->token.ticker,
+                sizeof(context->ticker_sent));
         // Keep track that we found the token.
         context->token1_found = true;
     } else {
@@ -37,13 +39,15 @@ void handle_provide_token(void *parameters) {
     if (ADDRESS_IS_NETWORK_TOKEN(context->contract_address_received)) {
         strlcpy(context->ticker_received, DEFAULT_NETWORK_TICKER, sizeof(context->ticker_received));
         context->decimals_received = WEI_TO_ETHER;
-        context->token2_found = true;        
+        context->token2_found = true;
     } else if (msg->item2) {
         // The Ethereum App found the information for the 2nd requested token!
         // Store its decimals.
         context->decimals_received = msg->item2->token.decimals;
         // Store its ticker.
-        strlcpy(context->ticker_received, (char *) msg->item2->token.ticker, sizeof(context->ticker_received));
+        strlcpy(context->ticker_received,
+                (char *) msg->item2->token.ticker,
+                sizeof(context->ticker_received));
         // Keep track that we found the token.
         context->token2_found = true;
     } else {

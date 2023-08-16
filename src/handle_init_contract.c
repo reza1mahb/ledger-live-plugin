@@ -1,6 +1,9 @@
 #include "venus_plugin.h"
 
-static int find_selector(uint32_t selector, const uint32_t *selectors, size_t n, venusSelector_t *out) {
+static int find_selector(uint32_t selector,
+                         const uint32_t *selectors,
+                         size_t n,
+                         venusSelector_t *out) {
     for (venusSelector_t i = 0; i < n; i++) {
         if (selector == selectors[i]) {
             *out = i;
@@ -26,8 +29,8 @@ void handle_init_contract(void *parameters) {
     // `msg->pluginContextLength`).
     if (msg->pluginContextLength < sizeof(context_t)) {
         PRINTF("Venus content size is bigger than allowed: expected %d got %d \n",
-                sizeof(context_t),
-                msg->pluginContextLength);
+               sizeof(context_t),
+               msg->pluginContextLength);
         msg->result = ETH_PLUGIN_RESULT_ERROR;
         return;
     }
@@ -45,13 +48,12 @@ void handle_init_contract(void *parameters) {
 
     // Set `next_param` to be the first field we expect to parse.
     switch (context->selectorIndex) {
-
         // *** Bep20
         case BEP20_APPROVE:
             context->next_param = APPROVE_SPENDER;
             break;
 
-        // *** Venus vTokens and vBNB
+            // *** Venus vTokens and vBNB
 
         case VENUS_MINT_BNB:
             context->next_param = UNEXPECTED_PARAMETER;
@@ -97,7 +99,7 @@ void handle_init_contract(void *parameters) {
         case VAULT_DEPOSIT:
             context->next_param = DEPOSIT_AMOUNT;
             break;
-        
+
         case VAULT_DEPOSIT_TOKEN:
         case VAULT_WITHDRAW_TOKEN_EXECUTE:
         case VAULT_WITHDRAW_TOKEN_REQUEST:
@@ -114,9 +116,9 @@ void handle_init_contract(void *parameters) {
 
         case VAULT_CLAIM:
             context->next_param = UNEXPECTED_PARAMETER;
-            break;            
+            break;
 
-        // *** Governance ***
+            // *** Governance ***
 
         case VENUS_DELEGATE_VOTE:
             context->next_param = DELEGATEE;
@@ -150,7 +152,7 @@ void handle_init_contract(void *parameters) {
 
         // *** VAI ***
         case VENUS_MINT_VAI:
-        case VENUS_REPAY_VAI:        
+        case VENUS_REPAY_VAI:
             context->next_param = VAI_AMOUNT;
             break;
 
