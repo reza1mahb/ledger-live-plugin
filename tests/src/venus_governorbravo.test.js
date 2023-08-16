@@ -1,0 +1,85 @@
+import {testInputDataTx, testParamsTx, testAmount1_18} from "./test_utils";
+
+// GovernorBravoDelegator
+const pluginName = "venus";
+const testName = 'governor'; // name of this test script used to genertate snapshot folder name
+
+const chainId = 56; //bnb-mainnet
+const contractAddr = "0x2d56dc077072b53571b8252008c60e945108c75a"; // GovernorBravoDelegator
+const testNetwork = "bnb-mainnet";
+const abi_path = `../networks/${testNetwork}/${pluginName}/abis/` + contractAddr + '.json';
+const abi = require(abi_path);
+
+// The tests for each method are in its own function
+jest.setTimeout(20000);
+testPropose();
+testCastVote();
+testCastVoteWithReason();
+
+function testPropose() {
+    const method = "propose";
+
+    // testInputDataTx
+    // Build our test transaction using InputData from previous transaction
+    // https://bscscan.com/tx/0xb11f3a81c444b25865678223eeccf32ef64039fb7b7bd88b76b587540139a652
+
+    const inputData = "0x164a1ab100000000000000000000000000000000000000000000000000000000000000c00000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000014000000000000000000000000000000000000000000000000000000000000001e000000000000000000000000000000000000000000000000000000000000002a000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000f322942f644a996a617bd29c16bd7d231d9f35e90000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000002e77697468647261775472656173757279424550323028616464726573732c75696e743235362c6164647265737329000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000060000000000000000000000000e9e7cea3dedca5984780bafc599bd69add087d56000000000000000000000000000000000000000000000a968163f0a57b4000000000000000000000000000000780c26389aca2b42ad9e4d5356804a9def8075700000000000000000000000000000000000000000000000000000000000008887b2276657273696f6e223a227632222c227469746c65223a225649502d31303920456e6761676520537465616b686f7573652046696e616e6369616c20746f20737570706f72742056656e75732052574120696e697469617469766573222c226465736372697074696f6e223a222a2a53756d6d6172792a2a5c6e5c6e5468656d6174746572227d000000000000000000000000000000000000000000000000";
+    
+        
+    testInputDataTx(testName, chainId, contractAddr, abi, method, inputData, "0", 10, 7);
+
+    // testParamsTx
+    // Build our test transaction using params
+
+    const targets = ["0xF322942f644A996A617BD29c16bd7d231d9F35E9"]; // Treasury
+    const values = [Number(0)];
+    const signatures = ["withdrawTreasuryBEP20(address,uint256,address)"];
+    const calldata = []; // "0x000000000000000000000000e9e7cea3dedca5984780bafc599bd69add087d56000000000000000000000000000000000000000000000a968163f0a57b4000000000000000000000000000000780c26389aca2b42ad9e4d5356804a9def80757"
+    const description = 'VIP-999 Engage ClearSign.Tech to develop and support Venus Ledger plugin"';
+    //const description = '{"version":"v2""title":"VIP-109 Engage Steakhouse Financial to support Venus RWA initiatives"';
+    const proposalType = Number(0);
+
+    testParamsTx(testName, chainId, contractAddr, abi, method, [targets, values, signatures, calldata, description, proposalType], "0", 9, 7);
+}
+
+function testCastVote() {
+    const method = "castVote";
+
+    // testInputDataTx
+    // Build our test transaction using InputData from previous transaction
+    // https://bscscan.com/tx/0x5c6f25509d6e9829074478bd7c1300b4d9665d10de60109ea9040e2dc09fb329
+
+    const inputData = "0x56781388000000000000000000000000000000000000000000000000000000000000006c0000000000000000000000000000000000000000000000000000000000000001";
+
+    testInputDataTx(testName, chainId, contractAddr, abi, method, inputData, "0", 6, 6);
+
+    // testParamsTx
+    // Build our test transaction using params
+    //was using number(100) function
+
+    const proposalId = Number(100);
+    const support = Number(2); // abstain
+
+    testParamsTx(testName, chainId, contractAddr, abi, method, [proposalId, support], "0", 6, 6);
+}
+
+function testCastVoteWithReason() {
+    const method = "castVoteWithReason";
+
+    // testInputDataTx
+    // Build our test transaction using InputData from previous transaction
+    // https://bscscan.com/tx/0x33256d531e920b01a3499753f836917f54081363c3cd5ae0cc55011ade0dce1d
+
+    const inputData = "0x7b3c71d3000000000000000000000000000000000000000000000000000000000000006c00000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000060000000000000000000000000000000000000000000000000000000000000001256656e757320746f20746865206d6f6f6e200000000000000000000000000000";
+
+    testInputDataTx(testName, chainId, contractAddr, abi, method, inputData, "0", 7, 7);
+
+    // testParamsTx
+    // Build our test transaction using params
+    const proposalId = Number(100);
+    const support = Number(1); // for
+    const reason = "Plugin developer @davd_mbt";
+
+   testParamsTx(testName, chainId, contractAddr, abi, method, [proposalId, support, reason], "0", 8, 7);
+
+}
